@@ -3,12 +3,19 @@ const cors = require("cors");
 
 const app = express();
 
+
 app.use(cors());
 app.use(express.json());
 
-app.get("/health", (req, res) => {
-  res.json({ status: "Backend is running" });
-});
+
+const healthRoutes = require("./routes/health.routes");
+const authRoutes = require("./routes/auth.routes");
+const protectedRoutes = require("./routes/protected.routes");
+const employeeRoutes = require("./routes/employee.routes");
+app.use("/api", employeeRoutes);
+app.use("/api", healthRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api", protectedRoutes);
 
 const PORT = 5000;
 app.listen(PORT, () => {
