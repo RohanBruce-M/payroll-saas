@@ -1,5 +1,6 @@
 
 # Payroll SaaS Application
+#change into dev branch to see the folder structure
 
 ## 📌 Project Overview
 Payroll SaaS is a full-stack web application designed to help organizations manage employees, handle authentication, and process payroll-related operations securely.
@@ -130,6 +131,9 @@ Relationships and keys are defined in `database/schema.md`.
 - Integrate MySQL database
 - Implement payroll processing logic
 - Improve frontend UI and connect full CRUD
+<<<<<<< HEAD
 
 ---
+=======
+>>>>>>> 3dc077c02569aed2c6fd3c0cc140c9e90edc1aae
 
