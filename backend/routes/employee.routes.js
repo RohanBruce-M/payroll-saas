@@ -4,14 +4,19 @@ const router = express.Router();
 const employeeController = require("../controllers/employee.controller");
 const verifyToken = require("../middlewares/auth.middleware");
 
-// READ
-router.get("/employees", verifyToken, employeeController.getEmployees);
 
-// CREATE
 router.post("/employees", verifyToken, employeeController.createEmployee);
 
-// UPDATE
+
+router.get("/employees", verifyToken, employeeController.getEmployees);
+
+
+router.get("/employees/:id", verifyToken, employeeController.getEmployeeById);
+
+
 router.put("/employees/:id", verifyToken, employeeController.updateEmployee);
 
+
+router.delete("/employees/:id", verifyToken, employeeController.deleteEmployee);
 
 module.exports = router;

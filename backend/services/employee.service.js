@@ -1,54 +1,60 @@
-let employees = [
- {
-      id: 1,
-      name: "rohan",
-      email: "rohan@test.com",
-      department: "HR",
-      salary: 50000
-    },
-    {
-      id: 2,
-      name: "vijay",
-      email: "vijay@test.com",
-      department: "Engineering",
-      salary: 60000
-    }
-];
+const db = require("../config/db");
 
-const getAllEmployees = () => {
-  return employees;
+const getAllEmployees = (callback) => {
+  const query = "SELECT * FROM employees";
+  db.query(query, callback);
 };
 
-const createEmployee = (employeeData) => {
-  const newEmployee = {
-    id: employees.length + 1,
-    ...employeeData
-  };
+const createEmployee = (employee, callback) => {
+  const query = `
+    INSERT INTO employees (name, email, phone, department, salary)
+    VALUES (?, ?, ?, ?, ?)
+  `;
+  const values = [
+    employee.name,
+    employee.email,
+    employee.phone,
+    employee.department,
+    employee.salary
+  ];
 
-  employees.push(newEmployee);
-  return newEmployee;
+  db.query(query, values, callback);
 };
 
-const updateEmployee = (id, updatedData) => {
-  const index = employees.findIndex(emp => emp.id === id);
+const updateEmployee = (id, employee, callback) => {
+  const query = `
+    UPDATE employees
+    SET name = ?, email = ?, phone = ?, department = ?, salary = ?
+    WHERE id = ?
+  `;
+  const values = [
+    employee.name,
+    employee.email,
+    employee.phone,
+    employee.department,
+    employee.salary,
+    id
+  ];
 
-  if (index === -1) {
-    return null;
-  }
-
-  employees[index] = {
-    ...employees[index],
-    ...updatedData
-  };
-
-  return employees[index];
+  db.query(query, values, callback);
 };
 
+const deleteEmployee = (id, callback) => {
+  const query = "DELETE FROM employees WHERE id = ?";
+  db.query(query, [id], callback);
+};
+
+const getEmployeeById = (id, callback) => {
+  const query = "SELECT * FROM employees WHERE id = ?";
+  db.query(query, [id], callback);
+};
 
 module.exports = {
   getAllEmployees,
   createEmployee,
-  updateEmployee
+  updateEmployee,
+  deleteEmployee,
+  getEmployeeById
 };
 
 

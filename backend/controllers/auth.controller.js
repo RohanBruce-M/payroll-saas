@@ -2,30 +2,39 @@ const jwt = require("jsonwebtoken");
 const jwtConfig = require("../config/jwt");
 
 const login = (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  
-  if (email === "admin@test.com" && password === "admin123") {
-    const payload = {
-      email: email,
-      role: "HR"
-    };
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Email and password required"
+      });
+    }
 
-    const token = jwt.sign(payload, jwtConfig.secret, {
-      expiresIn: jwtConfig.expiresIn
+    if (email === "admin@test.com" && password === "admin123") {
+      const token = jwt.sign(
+        { email, role: "HR" },
+        jwtConfig.secret,
+        { expiresIn: jwtConfig.expiresIn }
+      );
+
+      return res.json({
+        message: "Login successful",
+        token
+      });
+    }
+
+    return res.status(401).json({
+      message: "Invalid credentials"
     });
 
-    return res.json({
-      message: "Login successful",
-      token: token
+  } catch (error) {
+    console.error("LOGIN ERROR 👉", error);
+    return res.status(500).json({
+      message: "Internal server error"
     });
   }
-
-  return res.status(401).json({
-    message: "Invalid credentials"
-  });
 };
 
-module.exports = {
-  login
-};
+module.exports = { login };
+
