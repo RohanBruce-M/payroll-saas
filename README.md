@@ -1,7 +1,3 @@
-# Payroll SaaS Application
-#change into dev branch to see the folder structure
-
-
 ## 📌 Project Overview
 Payroll SaaS is a full-stack web application designed to manage employees and payroll-related operations in an organization.  
 The project is developed incrementally to understand real-world backend, frontend, database, and authentication workflows.
@@ -183,6 +179,128 @@ Employee list displayed on UI
 ✔ Protected data fetched and displayed  
 ✔ End-to-end flow tested successfully  
 ✔ Code pushed to GitHub (`dev` branch)
+
+---
+
+# 🚀 Week 4 – Payroll Module & Dashboard Integration
+
+Week 4 focused on building a complete payroll processing system and integrating it fully with the frontend dashboard.
+
+---
+
+## 🗄️ Database Enhancements (Week 4)
+
+### Payroll Table
+
+A new `payroll` table was created:
+
+- id (Primary Key, Auto Increment)
+- employee_id (Foreign Key → employees.id)
+- month
+- gross_salary
+- deductions
+- net_salary
+- created_at
+
+### Features:
+- Foreign key constraint ensures data integrity
+- `UNIQUE(employee_id, month)` prevents duplicate payroll processing
+- Payroll records automatically linked to employees
+
+---
+
+## 💰 Payroll Module (Backend)
+
+### Implemented APIs
+
+| Method | Endpoint | Description |
+|--------|----------|------------|
+| POST | `/api/payroll/calculate` | Calculate payroll for employee |
+| GET | `/api/payroll/:employee_id` | Get payroll history for employee |
+
+### Payroll Logic
+- Fetch base salary from employees table
+- Calculate:
+  - Gross Salary = Base Salary
+  - Deductions = 10% tax
+  - Net Salary = Gross − Deductions
+- Store result in payroll table
+- Prevent duplicate month processing
+
+---
+
+## 📊 Dashboard Integration (Week 4)
+
+The frontend dashboard was fully connected to backend APIs.
+
+### Employees Page
+- Fetches real employee data from backend
+- Allows payroll calculation per employee
+- Displays salary breakdown in modal
+- Handles duplicate month error properly
+
+### Payroll History Page
+- Fetches payroll records from backend
+- Groups payroll by month
+- Displays net salary per employee
+
+### Dashboard Overview Page
+- Shows:
+  - Total Employees
+  - Total Payroll Cost
+  - Average Salary
+  - Total Payroll Runs
+- Displays recent payroll records
+- All values dynamically calculated from backend data
+
+---
+
+## 🔄 End-to-End Flow (Week 4)
+
+```
+
+Login
+↓
+JWT stored in localStorage
+↓
+Dashboard protected via token check
+↓
+GET /api/employees
+↓
+POST /api/payroll/calculate
+↓
+Data stored in MySQL
+↓
+GET /api/payroll/:employee_id
+↓
+Dashboard + History updated in real-time
+
+```
+
+---
+
+## ✅ Week 4 Status
+
+✔ Payroll table created with foreign key  
+✔ Payroll calculation API implemented  
+✔ Duplicate payroll prevention enforced  
+✔ Payroll history API implemented  
+✔ Dashboard statistics integrated with backend  
+✔ Frontend fully connected to backend  
+✔ Complete payroll processing workflow functional  
+
+---
+
+## 🏁 Current Project Status
+
+The application now supports:
+
+- Authentication (JWT secured)
+- Employee CRUD operations
+- Payroll calculation & storage
+- Payroll history tracking
+- Real-time dashboard metrics
+- Full frontend-backend-database integration
 
 
 
