@@ -1,73 +1,150 @@
-# Welcome to your Lovable project
 
-## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+#  Frontend 
 
-## How can I edit this code?
+```md
+# Payroll SaaS – Frontend
 
-There are several ways of editing your application.
+This is the frontend application for the Payroll SaaS system.
 
-**Use Lovable**
+It is built using:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- shadcn/ui components
 
-Changes made via Lovable will be committed automatically to this repo.
+The frontend connects to a Node.js + Express backend secured with JWT authentication.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🚀 Features
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- 🔐 Login with JWT authentication
+- 📊 Dashboard with real-time payroll statistics
+- 👥 Employees listing (from MySQL database)
+- 💰 Payroll calculation
+- 📅 Payroll history grouped by month
+- 📱 Responsive SaaS-style dashboard layout
+- 🎨 Modern UI with animations
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🏗 Tech Stack
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+| Layer | Technology |
+|-------|------------|
+| Framework | React (Vite) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| UI Components | shadcn/ui |
+| Animation | Framer Motion |
+| Icons | Lucide React |
+| Auth | JWT (from backend) |
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## 🔗 Backend Integration
+
+The frontend connects to:
+
+```
+
+[http://localhost:5000](http://localhost:5000)
+
+```
+
+### APIs Used:
+
+- `POST /api/auth/login`
+- `GET /api/employees`
+- `POST /api/payroll/calculate`
+- `GET /api/payroll/:employee_id`
+
+JWT token is stored in `localStorage` and attached in request headers:
+
+```
+
+Authorization: Bearer <token>
+
+````
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Install dependencies
+
+```bash
+npm install
+````
+
+### 2️⃣ Run development server
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+App will run at:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+http://localhost:5173
+```
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔐 Demo Credentials
 
-## What technologies are used for this project?
+Use backend credentials:
 
-This project is built with:
+```
+Email: admin@test.com
+Password: admin123
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## 📂 Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+```
+src/
+  pages/
+    Login.tsx
+    DashboardHome.tsx
+    Employees.tsx
+    PayrollHistory.tsx
+  components/
+  hooks/
+  main.tsx
+```
 
-## Can I connect a custom domain to my Lovable project?
+---
 
-Yes, you can!
+## 🧠 Architecture
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```
+Login → JWT Token → Protected Dashboard
+         ↓
+     Employees Page → Fetch Employees
+         ↓
+     Payroll Calculate → Store in DB
+         ↓
+     Payroll History → Fetch Records
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+
+## 🏁 Status
+
+Frontend fully integrated with backend.
+
+✔ Authentication working
+✔ Protected routes working
+✔ Real MySQL data displayed
+✔ Payroll calculation functional
+✔ Payroll history displayed
+
+---
+
